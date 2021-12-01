@@ -1,4 +1,4 @@
-# adventure od code 2021
+# advent od code 2021
 
 ```
 

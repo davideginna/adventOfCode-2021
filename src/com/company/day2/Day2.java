@@ -38,20 +38,23 @@ public class Day2 {
     private static void p2(List<String> l) {
         var x = 0;
         var y = 0;
+        var aim = 0;
         for (String s : l) {
             var coordinate = s.split(" ");
             switch (coordinate[0]) {
                 case FORWARD:
                     x = x + Integer.parseInt(coordinate[1]);
+                    y = y + (Integer.parseInt(coordinate[1]) * aim);
                     break;
                 case DOWN:
-                    y = y + Integer.parseInt(coordinate[1]);
+                    aim = aim + Integer.parseInt(coordinate[1]);
                     break;
                 case UP:
-                    y = y - Integer.parseInt(coordinate[1]);
+                    aim = aim - Integer.parseInt(coordinate[1]);
                     break;
             }
         }
         System.out.println("x: " + x + " y: " + y + " x*y: " + x * y);
     }
+
 }

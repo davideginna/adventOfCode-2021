@@ -1,13 +1,14 @@
 package com.company.day1;
 
+import com.company.utility.Util;
+
 import java.util.List;
 
-import static com.company.utility.Util.readFile;
 
 public class Day1 {
     public static void main(String[] args) {
-        p1(readFile("src/com/company/day1/d1input.txt"));
-        p2(readFile("src/com/company/day1/d1input.txt"));
+        p1(Util.readFileInt("src/com/company/day1/d1input.txt"));
+        p2(Util.readFileInt("src/com/company/day1/d1input.txt"));
     }
 
     private static void p1(List<Integer> l) {

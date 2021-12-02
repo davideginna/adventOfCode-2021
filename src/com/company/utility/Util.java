@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Util {
 
-    public static List<Integer> readFile(String filename) {
+    public static List<Integer> readFileInt(String filename) {
         List<Integer> integers = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = br.readLine();
@@ -20,5 +20,19 @@ public class Util {
             e.printStackTrace();
         }
         return integers;
+    }
+
+    public static List<String> readFileString(String filename) {
+        List<String> strings = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            while (line != null) {
+                strings.add(line);
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return strings;
     }
 }

@@ -2,70 +2,75 @@ package com.company.day3;
 
 import com.company.utility.Util;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class Day3 {
 
-
     public static void main(String[] args) {
         p1(Util.readFileString("src/com/company/resource/d3input.txt"));
-        //p2(Util.readFileInt("src/com/company/resource/d3input.txt"));
+        p2(Util.readFileString("src/com/company/resource/d3input.txt"));
     }
 
-    private static void p1(List<String> l) {
-        int[] tot = new int[l.get(0).length()];
-
-        for (String s : l) {
-            for (int j = 0; j < s.split("").length; j++) {
-                tot[j] += Integer.parseInt(s.split("")[j]);
+    private static void p1(List<String> lines) {
+        int length = lines.get(0).length();
+        int[] result = new int[length];
+        for (String line : lines) {
+            char[] binaryChars = line.toCharArray();
+            for (int i = 0; i < length; i++) {
+                result[i] += binaryChars[i] == '0' ? -1 : 1;
             }
         }
-        var gamma = 0;
-        var epsilon = 0;
-        StringBuilder binGamma = new StringBuilder();
-        StringBuilder binEpsilon = new StringBuilder();
-        for (int j : tot) {
-            if (j > l.size() / 2) {
-                binGamma.append("1");
+        int gammaRate = 0;
+        for (int i = 0; i < length; i++) {
+            gammaRate += result[i] > 0 ? (Math.pow(2, length - i - 1)) : 0;
+        }
+        //svisionata pura con i bit
+        System.out.println("Part 1: " + (int) (gammaRate * (Math.pow(2, length) - 1 - gammaRate)));
+    }
+
+    private static void p2(List<String> lines) {
+        int ratingO = calculateValue(lines, (one, zero) -> one >= zero);
+        int ratingCO2 = calculateValue(lines, (one, zero) -> one < zero);
+        System.out.println("Part 2: " + ratingO * ratingCO2);
+    }
+
+    private static Integer calculateValue(List<String> lines, BiPredicate<Integer, Integer> biPredicate) {
+        int length = lines.get(0).length();
+        LinkedList<String> linkedList = new LinkedList<>(lines);
+        List<String> listZero = new ArrayList<>();
+        List<String> listUno = new ArrayList<>();
+
+        char[] result = new char[length];
+        for (int i = 0; i < length; i++) {
+            while (!linkedList.isEmpty()) {
+                String line = linkedList.pop();
+                char[] binaryChars = line.toCharArray();
+                if (binaryChars[i] == '0') {
+                    listZero.add(line);
+                } else {
+                    listUno.add(line);
+                }
+            }
+            //test della condizione
+            if (biPredicate.test(listUno.size(), listZero.size())) {
+                result[i] = '1';
+                linkedList.addAll(listUno);
             } else {
-                binGamma.append("0");
+                result[i] = '0';
+                linkedList.addAll(listZero);
             }
-        }
-        invertString(binGamma, binEpsilon);
-        gamma = Integer.parseInt(binGamma.toString(), 2);
-        epsilon = Integer.parseInt(binEpsilon.toString(), 2);
-        System.out.println(Integer.parseInt(binGamma.toString(), 2));
-        System.out.println(Integer.parseInt(binEpsilon.toString(), 2));
-        System.out.println(gamma * epsilon);
-    }
-
-    private static void p2() {
-        /*
-        00100
-        11110
-        10110
-        10111
-        10101
-        01111
-        00111
-        11100
-        10000
-        11001
-        00010
-        01010
-        */
-
-        //tenere solo i numeri che hanno in posizione x un uno
-    }
-
-
-    private static void invertString(StringBuilder binGamma, StringBuilder binEpsilon) {
-        for (int i = 0; i < binGamma.toString().length(); i++) {
-            if (binGamma.toString().split("")[i].equals("0")) {
-                binEpsilon.append("1");
-            } else {
-                binEpsilon.append("0");
+            if (linkedList.size() == 1) {
+                result = linkedList.get(0).toCharArray();
+                break;
             }
+            listUno = new ArrayList<>();
+            listZero = new ArrayList<>();
         }
+        return Integer.valueOf(String.valueOf(result), 2);
     }
+
+
 }

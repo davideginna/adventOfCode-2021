@@ -1,4 +1,4 @@
-package main.java.com.company.day4;
+package com.company.day4;
 
 import java.util.List;
 

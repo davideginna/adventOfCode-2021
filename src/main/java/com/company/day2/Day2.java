@@ -11,8 +11,8 @@ public class Day2 {
     public static final String UP = "up";
 
     public static void main(String[] args) {
-        p1(Util.readFileString("src/com/company/resource/d2input.txt"));
-        p2(Util.readFileString("src/com/company/resource/d2input.txt"));
+        p1(Util.readFileString("src/main/java/com/company/resource/d2input.txt"));
+        p2(Util.readFileString("src/main/java/com/company/resource/d2input.txt"));
     }
 
     private static void p1(List<String> l) {

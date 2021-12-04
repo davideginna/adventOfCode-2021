@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Day1 {
     public static void main(String[] args) {
-        p1(Util.readFileInt("src/com/company/resource/d1input.txt"));
-        p2(Util.readFileInt("src/com/company/resource/d1input.txt"));
+        p1(Util.readFileInt("src/main/java/com/company/resource/d1input.txt"));
+        p2(Util.readFileInt("src/main/java/com/company/resource/d1input.txt"));
     }
 
     private static void p1(List<Integer> l) {

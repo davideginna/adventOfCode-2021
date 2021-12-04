@@ -10,8 +10,8 @@ import java.util.function.BiPredicate;
 public class Day3 {
 
     public static void main(String[] args) {
-        p1(Util.readFileString("src/main/java/com/company/resource/d3input.txt"));
-        p2(Util.readFileString("src/main/java/com/company/resource/d3input.txt"));
+        p1(Util.readFileString("ssrc/main/resources/inputs/d3input.txt"));
+        p2(Util.readFileString("src/main/resources/inputs/d3input.txt"));
     }
 
     private static void p1(List<String> lines) {

@@ -1,4 +1,4 @@
-package com.company.Day05;
+package com.company.day05;
 
 import java.io.InputStream;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.company.day05;
+package com.company.day5;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class Day05 {
+public class Day5 {
     public static void main(String[] args) {
-        InputStream is = Day05.class.getClassLoader().getResourceAsStream("inputs/d5input.txt");
+        InputStream is = Day5.class.getClassLoader().getResourceAsStream("inputs/d5input.txt");
         List<Integer[]> vents = new ArrayList<>();
         int dim = -1;
         assert is != null;

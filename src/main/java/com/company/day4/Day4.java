@@ -11,10 +11,10 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Day04 {
+public class Day4 {
 
     public static void main(String[] args) {
-        InputStream is = Day04.class.getClassLoader().getResourceAsStream("inputs/d4input.txt");
+        InputStream is = Day4.class.getClassLoader().getResourceAsStream("inputs/d4input.txt");
         Integer[] pallottoliere;
         List<Integer[][]> bingoBoards = new ArrayList<>();
         try (Scanner scanner = new Scanner(is)) {

@@ -1,14 +1,14 @@
 package com.company.day6;
 
-import com.company.day05.Day05;
+import com.company.day5.Day5;
 
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Day06 {
+public class Day6 {
     public static void main(String[] args) {
-        InputStream is = Day05.class.getClassLoader().getResourceAsStream("inputs/d6input.txt");
+        InputStream is = Day5.class.getClassLoader().getResourceAsStream("inputs/d6input.txt");
         assert is != null;
         try (Scanner scanner = new Scanner(is)) {
             var fish = Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).toArray(Integer[]::new);

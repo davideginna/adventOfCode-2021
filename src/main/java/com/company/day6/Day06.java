@@ -14,18 +14,16 @@ public class Day06 {
             var fish = Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).toArray(Integer[]::new);
             long[] lifeFish = getInts(fish);
             for (int i = 0; i < 80; i++) {
-                shiftToLeft(lifeFish, i);
+                shiftToLeft(lifeFish);
             }
             System.out.println("p1: " + Arrays.stream(lifeFish).sum());
 
             lifeFish = getInts(fish);
             for (int i = 0; i < 256; i++) {
-                shiftToLeft(lifeFish, i);
+                shiftToLeft(lifeFish);
             }
-            //System.out.println(Arrays.toString(Arrays.stream(lifeFish).toArray()));
             System.out.println("p2: " + Arrays.stream(lifeFish).sum());
         }
-
     }
 
     private static long[] getInts(Integer[] fish) {
@@ -36,7 +34,7 @@ public class Day06 {
         return lifeFish;
     }
 
-    public static void shiftToLeft(long[] lifeFish, int iterazione) {
+    public static void shiftToLeft(long[] lifeFish) {
         long pesceZero = lifeFish[0];
         System.arraycopy(lifeFish, 1, lifeFish, 0, lifeFish.length - 1);
         lifeFish[6] = lifeFish[6] + pesceZero;

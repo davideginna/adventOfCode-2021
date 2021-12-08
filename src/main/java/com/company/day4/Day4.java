@@ -51,7 +51,7 @@ public class Day4 {
     }
 
     private static void partTwo(Integer[] randomNumbers, List<Integer[][]> bingoBoards) {
-        List<int[][]> results = bingoBoards.stream().map(b -> new int[b.length][b.length]).collect(Collectors.toList());;
+        List<int[][]> results = bingoBoards.stream().map(b -> new int[b.length][b.length]).collect(Collectors.toList());
         for (Integer randomNumber : randomNumbers) {
             List<Pair<Integer[][], int[][]>> winners = getWinners(bingoBoards, results, randomNumber);
             if (!winners.isEmpty()) {
@@ -109,7 +109,7 @@ public class Day4 {
         for (int i = 0; i < bingoBoard.length; i++) {
             for (int j = 0; j < bingoBoard.length; j++) {
                 if (result[i][j] == 0) {
-                    lastResult+= bingoBoard[i][j];
+                    lastResult += bingoBoard[i][j];
                 }
             }
         }

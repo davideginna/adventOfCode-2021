@@ -1,43 +1,44 @@
 package com.company.day7;
 
-import com.company.day5.Day5;
-
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.Float.NaN;
 
 public class Day7 {
     public static void main(String[] args) {
-        InputStream is = Day5.class.getClassLoader().getResourceAsStream("inputs/d6input.txt");
+        InputStream is = Day7.class.getClassLoader().getResourceAsStream("inputs/d7input.txt");
         assert is != null;
         try (Scanner scanner = new Scanner(is)) {
-            var fish = Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).toArray(Integer[]::new);
-            long[] lifeFish = getInts(fish);
-            for (int i = 0; i < 80; i++) {
-                shiftToLeft(lifeFish);
-            }
-            System.out.println("p1: " + Arrays.stream(lifeFish).sum());
+            List<Integer> crabsPosition = Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).collect(Collectors.toList());
+            System.out.println(crabsPosition);
 
-            lifeFish = getInts(fish);
-            for (int i = 0; i < 256; i++) {
-                shiftToLeft(lifeFish);
-            }
-            System.out.println("p2: " + Arrays.stream(lifeFish).sum());
+            //PART 1
+            var median = ((double) crabsPosition.get(crabsPosition.size() / 2) + (double) crabsPosition.get(crabsPosition.size() / 2 - 1)) / 2;
+            //System.out.println(median);
+            System.out.println("Part1: " + crabsPosition.stream().mapToDouble(d -> Math.abs(d - median)).sum());
+
+            //PART 2
+            var average =Math.round(Arrays.stream(crabsPosition.stream()
+                    .mapToInt(Integer::intValue)
+                    .toArray()).average().orElse(NaN));
+            System.out.println(average);
+
+            System.out.println("Part2: " + BigDecimal.valueOf(crabsPosition.stream().mapToDouble(d -> {
+                double sum = 0.0;
+                for (int i = 0; i <= Math.abs(d - average); i++) {
+                    sum += i;
+                }
+                return sum;
+            }).sum()).toBigInteger());
         }
+
     }
 
-    private static long[] getInts(Integer[] fish) {
-        long[] lifeFish = new long[9];
-        for (Integer f : fish) {
-            lifeFish[f] += 1;
-        }
-        return lifeFish;
-    }
 
-    public static void shiftToLeft(long[] lifeFish) {
-        long pesceZero = lifeFish[0];
-        System.arraycopy(lifeFish, 1, lifeFish, 0, lifeFish.length - 1);
-        lifeFish[6] = lifeFish[6] + pesceZero;
-        lifeFish[8] = pesceZero;
-    }
 }

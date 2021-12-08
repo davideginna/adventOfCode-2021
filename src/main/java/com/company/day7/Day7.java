@@ -1,44 +1,43 @@
 package com.company.day7;
 
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.lang.Float.NaN;
 
 public class Day7 {
     public static void main(String[] args) {
         InputStream is = Day7.class.getClassLoader().getResourceAsStream("inputs/d7input.txt");
         assert is != null;
         try (Scanner scanner = new Scanner(is)) {
-            List<Integer> crabsPosition = Arrays.stream(scanner.nextLine().split(",")).map(Integer::valueOf).collect(Collectors.toList());
-            System.out.println(crabsPosition);
-
-            //PART 1
-            var median = ((double) crabsPosition.get(crabsPosition.size() / 2) + (double) crabsPosition.get(crabsPosition.size() / 2 - 1)) / 2;
-            //System.out.println(median);
-            System.out.println("Part1: " + crabsPosition.stream().mapToDouble(d -> Math.abs(d - median)).sum());
-
-            //PART 2
-            var average =Math.round(Arrays.stream(crabsPosition.stream()
-                    .mapToInt(Integer::intValue)
-                    .toArray()).average().orElse(NaN));
-            System.out.println(average);
-
-            System.out.println("Part2: " + BigDecimal.valueOf(crabsPosition.stream().mapToDouble(d -> {
-                double sum = 0.0;
-                for (int i = 0; i <= Math.abs(d - average); i++) {
-                    sum += i;
-                }
-                return sum;
-            }).sum()).toBigInteger());
+            int[] postionCrabs = Arrays.stream(scanner.nextLine().split(",")).mapToInt(Integer::valueOf).toArray();
+            int minPos = Arrays.stream(postionCrabs).min().getAsInt();
+            int maxPos = Arrays.stream(postionCrabs).max().getAsInt();
+            p1(postionCrabs, minPos, maxPos);
+            p2(postionCrabs, minPos, maxPos);
         }
-
     }
 
+    private static void p1(int[] postionCrabs, int minPos, int maxPos) {
+        System.out.println("Part 1: " + IntStream.range(minPos, maxPos + 1)
+                .map(pos -> {
+                    int fuel = 0;
+                    for (int crab : postionCrabs) {
+                        fuel += Math.abs(pos - crab);
+                    }
+                    return fuel;
+                }).min().getAsInt());
+    }
 
+    private static void p2(int[] postionCrabs, int minPos, int maxPos) {
+        System.out.println("Part 2: " + IntStream.range(minPos, maxPos + 1)
+                .map(pos -> {
+                    int fuel = 0;
+                    for (int crab : postionCrabs) {
+                        int moves = Math.abs(pos - crab);
+                        fuel += (moves * (moves + 1)) / 2;
+                    }
+                    return fuel;
+                }).min().getAsInt());
+    }
 }

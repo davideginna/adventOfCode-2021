@@ -9,7 +9,7 @@ import java.util.*;
 public class Day12 {
     public static void main(String[] args) throws FileNotFoundException {
         Day12 day12 = new Day12();
-        InputStream is = Day11.class.getClassLoader().getResourceAsStream("inputs/d12input.txt");
+        InputStream is = Day12.class.getClassLoader().getResourceAsStream("inputs/d12input.txt");
         assert is != null;
         List<String> inputs = new ArrayList<>();
         try (Scanner myReader = new Scanner(is)) {
